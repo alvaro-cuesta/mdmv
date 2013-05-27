@@ -3,7 +3,7 @@
     "preferGlobal": true,
     "version": "0.0.1",
     "author": "Alvaro Cuesta <alvaro-cuesta@GitHub>",
-    "description": "a helper for Mediavida's post",
+    "description": "a helper for Mediavida's post writer",
     "bin": {
 	"mv-poster": "./bin/mv-poster.coffee"
     },
@@ -20,7 +20,12 @@
 	"mediavida"
     ],
     "dependencies": {
-	"express": "*"
+	"express": "*",
+	"blade": "*",
+	"stylus": "*",
+	"coffee-script": "*",
+        "share": "*",
+        "connect-coffee-script": "*"
     },
     "license": "MIT",
     "engines": {
