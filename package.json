@@ -1,0 +1,31 @@
+{
+    "name": "mv-poster",
+    "preferGlobal": true,
+    "version": "0.0.1",
+    "author": "Alvaro Cuesta <alvaro-cuesta@GitHub>",
+    "description": "a helper for Mediavida's post",
+    "bin": {
+	"mv-poster": "./bin/mv-poster"
+    },
+    "scripts": {
+	"start": "node ./bin/mv-poster"
+    },
+    "main": "./lib/mv-poster",
+    "repository": {
+	"type": "git",
+	"url": "https://github.com/alvaro-cuesta/mv-poster.git"
+    },
+    "keywords": [
+	"mv",
+	"mediavida"
+    ],
+    "dependencies": {
+	"express": "*",
+	"coffee-script": "*"
+    },
+    "license": "MIT",
+    "engines": {
+	"node": ">=0.10",
+	"coffee": "*"
+    }
+}
