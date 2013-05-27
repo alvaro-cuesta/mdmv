@@ -5,10 +5,10 @@
     "author": "Alvaro Cuesta <alvaro-cuesta@GitHub>",
     "description": "a helper for Mediavida's post",
     "bin": {
-	"mv-poster": "./bin/mv-poster"
+	"mv-poster": "./bin/mv-poster.coffee"
     },
     "scripts": {
-	"start": "node ./bin/mv-poster"
+	"start": "coffee ./bin/mv-poster.coffee"
     },
     "main": "./lib/mv-poster",
     "repository": {
@@ -20,12 +20,10 @@
 	"mediavida"
     ],
     "dependencies": {
-	"express": "*",
-	"coffee-script": "*"
+	"express": "*"
     },
     "license": "MIT",
     "engines": {
-	"node": ">=0.10",
 	"coffee": "*"
     }
 }
