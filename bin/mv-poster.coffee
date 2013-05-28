@@ -35,7 +35,7 @@ app.get '/', (req, res) ->
     res.redirect '/' + buf.toString 'hex'
 
 app.get '/:id', (req, res) ->
-  res.render 'index'
+  res.render 'poster'
 
 app.listen port
 console.log "MV Poster listening on #{port}"
