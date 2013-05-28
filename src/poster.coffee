@@ -1,16 +1,47 @@
 window.onload = ->
 
-  mv = (converter) ->
+  code = (converter) ->
+    [
+      type: ''
+    ]
+
+  noWhite = (converter) ->
     [
       type: 'html'
-      regex: '<h1.*>(.*)</h1>'
-      replace: '<h4 class="bar"><span>$1</span></h4>'
+      regex: '\n'
+      replace: ''
+    ]
+
+  noP = (replace) -> (converter) ->
+    [
+      type: 'html'
+      regex: '<p>'
+      replace: ''
     ,
+      type: 'html'
+      regex: '</p>'
+      replace: replace
+    ]
+
+  noPre = (converter) ->
+    [
+      type: 'html'
+      regex: '</?pre>'
+      replace: ''
+    ]
+
+
+  mv = (converter) ->
+    [ # #
+      type: 'html'
+      regex: '<h1.*>(.*)</h1>'
+      replace: '<h4 class="bar"><span>$1</span></h4><br><br>'
+    , # ##
       type: 'html'
       regex: '<h2.*>(.*)</h2>'
       replace: (match, content, num, text) ->
-        "<img src=\"http://tools.mediavida.com/sub.php?t=#{encodeURIComponent content}\">"
-    ,
+        "<img src=\"http://tools.mediavida.com/sub.php?t=#{encodeURIComponent content}\"><br><br>"
+    , # code
       type: 'html'
       regex: '<code>'
       replace: '<code class="prettyprint linenums">'
@@ -18,7 +49,7 @@ window.onload = ->
       type: 'html'
       regex: '\n</code>'
       replace: '</code>'
-    ,
+    , # lists
       type: 'html'
       regex: '\n<(/)?(li|ul)>'
       replace: '<$1$2>'
@@ -28,21 +59,9 @@ window.onload = ->
       replace: '<$1$2>'
     ,
       type: 'html'
-      regex: '\n'
-      replace: '<br/>'
-    ,
-      type: 'html'
-      regex: '</?pre>'
-      replace: ''
-    ,
-      type: 'html'
-      regex: '</?p>'
-      replace: ''
-    ,
-      type: 'html'
       regex: '<ul>'
       replace: '<ul class="flist">'
-    ,
+    , # ol = ul
       type: 'html'
       regex: '<ol>'
       replace: '<ul class="flist">'
@@ -53,37 +72,29 @@ window.onload = ->
     ]
 
   bbcode = (converter) ->
-    [
+    [ # [bar]
       type: 'html'
       regex: '<h1.*>(.*)</h1>'
-      replace: '[bar]$1[/bar]'
-    ,
+      replace: '[bar]$1[/bar]\n'
+    , # bar pequenya
       type: 'html'
       regex: '<h2.*>(.*)</h2>'
       replace: (match, content, num, text) ->
         "[img]http://tools.mediavida.com/sub.php?t=#{encodeURIComponent content}[/img]"
-    ,
+    , # [img]
       type: 'html'
       regex: '<img.*src="(.*)" alt.*>'
       replace: (match, content, num, text) ->
         "[img]#{content}[/img]"
-    ,
+    , # [code]
       type: 'html'
       regex: '\n?<(/)?code>'
       replace: '[$1code]'
-    ,
-      type: 'html'
-      regex: '</?pre>'
-      replace: ''
-    ,
-      type: 'html'
-      regex: '</?p>'
-      replace: ''
-    ,
+    , # [b]
       type: 'html'
       regex: '<(/)?strong>'
       replace: '[$1b]'
-    ,
+    , # [i]
       type: 'html'
       regex: '<(/)?em>'
       replace: '[$1i]'
@@ -102,11 +113,11 @@ window.onload = ->
     ,
       type: 'html'
       regex: '</li>'
-      replace: ''
+      replace: '\n'
     ]
 
-  render = new Showdown.converter extensions: [mv]
-  mvcode = new Showdown.converter extensions: [bbcode]
+  render = new Showdown.converter extensions: [noWhite, noPre, mv, noP('<br><br>')]
+  mvcode = new Showdown.converter extensions: [noWhite, noPre, bbcode, noP('\n\n')]
 
   generated = document.getElementById 'code'
 
