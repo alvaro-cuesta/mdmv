@@ -1,18 +1,51 @@
 (function() {
   window.onload = function() {
-    var bbcode, editor, generated, mv, mvcode, render, session;
+    var bbcode, editor, generated, mv, mvcode, noP, noPre, noWhite, render, session;
 
+    noWhite = function(converter) {
+      return [
+        {
+          type: 'html',
+          regex: '\n',
+          replace: ''
+        }
+      ];
+    };
+    noP = function(replace) {
+      return function(converter) {
+        return [
+          {
+            type: 'html',
+            regex: '<p>',
+            replace: ''
+          }, {
+            type: 'html',
+            regex: '</p>',
+            replace: replace
+          }
+        ];
+      };
+    };
+    noPre = function(converter) {
+      return [
+        {
+          type: 'html',
+          regex: '</?pre>',
+          replace: ''
+        }
+      ];
+    };
     mv = function(converter) {
       return [
         {
           type: 'html',
           regex: '<h1.*>(.*)</h1>',
-          replace: '<h4 class="bar"><span>$1</span></h4>'
+          replace: '<h4 class="bar"><span>$1</span></h4><br><br>'
         }, {
           type: 'html',
           regex: '<h2.*>(.*)</h2>',
           replace: function(match, content, num, text) {
-            return "<img src=\"http://tools.mediavida.com/sub.php?t=" + (encodeURIComponent(content)) + "\">";
+            return "<img src=\"http://tools.mediavida.com/sub.php?t=" + (encodeURIComponent(content)) + "\"><br><br>";
           }
         }, {
           type: 'html',
@@ -30,18 +63,6 @@
           type: 'html',
           regex: '<(/)?(li|ul)>\n',
           replace: '<$1$2>'
-        }, {
-          type: 'html',
-          regex: '\n',
-          replace: '<br/>'
-        }, {
-          type: 'html',
-          regex: '</?pre>',
-          replace: ''
-        }, {
-          type: 'html',
-          regex: '</?p>',
-          replace: ''
         }, {
           type: 'html',
           regex: '<ul>',
@@ -62,7 +83,7 @@
         {
           type: 'html',
           regex: '<h1.*>(.*)</h1>',
-          replace: '[bar]$1[/bar]'
+          replace: '[bar]$1[/bar]\n'
         }, {
           type: 'html',
           regex: '<h2.*>(.*)</h2>',
@@ -79,14 +100,6 @@
           type: 'html',
           regex: '\n?<(/)?code>',
           replace: '[$1code]'
-        }, {
-          type: 'html',
-          regex: '</?pre>',
-          replace: ''
-        }, {
-          type: 'html',
-          regex: '</?p>',
-          replace: ''
         }, {
           type: 'html',
           regex: '<(/)?strong>',
@@ -110,15 +123,15 @@
         }, {
           type: 'html',
           regex: '</li>',
-          replace: ''
+          replace: '\n'
         }
       ];
     };
     render = new Showdown.converter({
-      extensions: [mv]
+      extensions: [noWhite, noPre, mv, noP('<br><br>')]
     });
     mvcode = new Showdown.converter({
-      extensions: [bbcode]
+      extensions: [noWhite, noPre, bbcode, noP('\n\n')]
     });
     generated = document.getElementById('code');
     editor = ace.edit('editor');
