@@ -15,9 +15,14 @@ dev = app.get('env') == 'development'
 
 app.use express.favicon "#{PUB}/favicon.ico"
 app.use express.logger if dev then 'dev'
-app.use require('connect-coffee-script')
-  src: SRC
-  dest: PUB
+app.use require('browserify-express')
+  entry: __dirname + '/lib/entry.coffee',
+  watch: __dirname + '/lib/',
+  mount: '/js/mdmv.js',
+  verbose: dev,
+  minify: not dev,
+  bundle_opts: debug: dev
+  watch_opts: recursive: false
 app.use require('stylus').middleware
   src: SRC
   dest: PUB
@@ -35,7 +40,6 @@ app.get '/', (req, res) ->
     res.redirect '/' + buf.toString 'hex'
 
 app.get /\/([0-9a-f]+)\.txt/, (req, res) ->
-  console.log req.params
   app.model.getSnapshot req.params[0], (err, doc) ->
     throw err if err?
     res.type 'text/plain; charset=UTF-8'
@@ -67,5 +71,3 @@ app.get /\/([0-9a-f]+)/, (req, res) ->
 
 app.listen PORT, ->
   console.log "MDMV listening on #{PORT}"
-
-console.log sharejs
