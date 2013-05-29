@@ -3,74 +3,209 @@
 
 @media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/node_modules\/stylus\/lib\/functions\/index\.styl}line{font-family:\000031}}
 
-/* line 1 : /home/kaod/mdmv/src/editor.styl */
+/* line 239 : /home/kaod/mdmv/src/vendor/split-pane.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\000031}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\00003239}}
+/*
+
+Split Pane v0.2
+
+Copyright (c) 2012 Simon Hagström
+
+Released under the MIT license
+https://raw.github.com/shagstrom/split-pane/master/LICENSE
+
+*/
+
+/* line 11 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000311}}
+.split-pane {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* line 18 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000318}}
+.split-pane.fixed-top > .split-pane-component,
+.split-pane.fixed-bottom > .split-pane-component,
+.split-pane.horizontal-percent > .split-pane-component {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  top: auto;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* line 28 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000328}}
+.split-pane.fixed-top > .split-pane-component:first-child,
+.split-pane.fixed-bottom > .split-pane-component:first-child,
+.split-pane.horizontal-percent > .split-pane-component:first-child {
+  top: 0;
+  bottom: auto;
+}
+
+/* line 33 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000333}}
+.split-pane.fixed-top > .split-pane-divider,
+.split-pane.fixed-bottom > .split-pane-divider,
+.split-pane.horizontal-percent > .split-pane-divider {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  cursor: ns-resize;
+  cursor: n-resize 9;
+  z-index: 2;
+}
+
+/* line 42 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000342}}
+.split-pane.fixed-left > .split-pane-component,
+.split-pane.fixed-right > .split-pane-component,
+.split-pane.vertical-percent > .split-pane-component {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: auto;
+  left: auto;
+  right: 0;
+  z-index: 1;
+}
+
+/* line 52 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000352}}
+.split-pane.fixed-left > .split-pane-component:first-child,
+.split-pane.fixed-right > .split-pane-component:first-child,
+.split-pane.vertical-percent > .split-pane-component:first-child {
+  left: 0;
+  right: auto;
+}
+
+/* line 57 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000357}}
+.split-pane.fixed-left > .split-pane-divider,
+.split-pane.fixed-right > .split-pane-divider,
+.split-pane.vertical-percent > .split-pane-divider {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  cursor: ew-resize;
+  cursor: w-resize 9;
+  z-index: 2;
+}
+
+/* line 66 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000366}}
+.split-pane-resize-shim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: none;
+}
+
+/* line 76 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000376}}
+.split-pane.fixed-left > .split-pane-resize-shim,
+.split-pane.fixed-right > .split-pane-resize-shim,
+.split-pane.vertical-percent > .split-pane-resize-shim {
+  cursor: ew-resize;
+  cursor: w-resize 9;
+}
+
+/* line 81 : /home/kaod/mdmv/src/vendor/split-pane.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/vendor\/split-pane\.styl}line{font-family:\0000381}}
+.split-pane.fixed-top > .split-pane-resize-shim,
+.split-pane.fixed-bottom > .split-pane-resize-shim,
+.split-pane.horizontal-percent > .split-pane-resize-shim {
+  cursor: ns-resize;
+  cursor: n-resize 9;
+}
+
+/* line 3 : /home/kaod/mdmv/src/editor.styl */
+
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\000033}}
 #editor,
 #generated {
   width: 100%;
   height: 50%;
 }
 
-/* line 6 : /home/kaod/mdmv/src/editor.styl */
+/* line 8 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\000036}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\000038}}
 #generated {
   color: #fff;
 }
 
-/* line 9 : /home/kaod/mdmv/src/editor.styl */
+/* line 11 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\000039}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000311}}
 #code {
   height: 100%;
   width: 100%;
   overflow: auto;
 }
 
-/* line 14 : /home/kaod/mdmv/src/editor.styl */
+/* line 16 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000314}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000316}}
 #left,
 #right {
   float: left;
 }
 
-/* line 18 : /home/kaod/mdmv/src/editor.styl */
+/* line 20 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000318}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000320}}
 #right,
 #content_body,
 .post {
   overflow: auto;
 }
 
-/* line 24 : /home/kaod/mdmv/src/editor.styl */
+/* line 26 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000324}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000326}}
 #left-component {
   right: 60%;
   margin-right: 5px;
 }
 
-/* line 28 : /home/kaod/mdmv/src/editor.styl */
+/* line 30 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000328}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000330}}
 #my-divider {
   right: 60%;
   width: 5px;
 }
 
-/* line 32 : /home/kaod/mdmv/src/editor.styl */
+/* line 34 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000332}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000334}}
 #right-component {
   width: 60%;
 }
 
-/* line 35 : /home/kaod/mdmv/src/editor.styl */
+/* line 37 : /home/kaod/mdmv/src/editor.styl */
 
-@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000335}}
+@media -stylus-debug-info{filename{font-family:file\:\/\/\/home\/kaod\/mdmv\/src\/editor\.styl}line{font-family:\0000337}}
 body,
 html,
 #left,

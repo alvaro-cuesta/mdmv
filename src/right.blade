@@ -1,0 +1,37 @@
+function autor(nombre, ct, avatar)
+  div.autor
+    dl
+      dt
+        a= nombre
+      dd(style='font-size: 10px')= ct
+      dd
+        img(src=avatar)
+      dd.social
+        ul(style='overflow: hidden')
+          li(style='float: left')
+            a.tooltip
+
+function msg(num, time, body)
+  div.msg
+    div.info
+      a.qn= "#" + num
+      span= time
+    div.body
+      div.cuerpo!= body
+
+#content_body
+  #main
+    .post.odd.mark
+      call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
+      call msg(1, 'Hoy, 18:06', html)
+      .binfo
+        .bwrap
+          .btop
+            a.atop Top
+    .post
+      call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
+      call msg(2, 'Hoy, 18:06', html)
+      .binfo
+        .bwrap
+          .btop
+            a.atop Top

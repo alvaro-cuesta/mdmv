@@ -1,5 +1,6 @@
 marked = require 'marked'
 escape = require('./utils.coffee').escape
+Lexer = require './Lexer.coffee'
 
 #
 # InlineLexer
@@ -159,3 +160,6 @@ module.exports.Parser = class HTMLParser extends marked.Parser
 
 module.exports.parse = HTMLParser.parse = (src, options) ->
   (new HTMLParser options).parse src
+
+module.exports.make = (text, options) ->
+  HTMLParser.parse (Lexer.lex text, options), options

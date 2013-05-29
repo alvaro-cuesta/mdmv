@@ -1,5 +1,8 @@
 marked = require 'marked'
-mdmv = require './index.coffee'
+mdmv = require '../lib'
+$ = require 'jquery'
+require './vendor/split-pane'
+require './vendor/prettify'
 
 $ ->
   # Markdown
@@ -11,14 +14,6 @@ $ ->
     sanitize: true
     smartLists: true
     smartypants: true
-
-  md2html = (text) ->
-    tokens = mdmv.lex text, options
-    mdmv.html.Parser.parse tokens, options
-
-  md2mv = (text) ->
-    tokens = mdmv.lex text, options
-    mdmv.mv.parse tokens, options
 
   # Editor
   editor = ace.edit 'editor'
@@ -32,9 +27,9 @@ $ ->
 
   mvcode = document.getElementById 'code'
   session.on 'change', ->
-    mvcode.innerHTML = md2mv session.getValue()
-
-    html = md2html session.getValue()
+    text = session.getValue()
+    mvcode.innerHTML = mdmv.mv.make text, options
+    html = mdmv.html.make text, options
     msg.innerHTML = html for msg in document.getElementsByClassName 'cuerpo'
     window.prettyPrint()
 

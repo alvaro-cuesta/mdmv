@@ -1,0 +1,12 @@
+include "layout.blade"
+
+render title("Editor")
+replace block body
+  .split-pane.vertical-percent
+    #left-component.split-pane-component
+      #editor
+      #generated
+        pre#code
+    #my-divider.split-pane-divider
+    #right-component.split-pane-component
+      include "right.blade"
