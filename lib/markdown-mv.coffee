@@ -119,7 +119,7 @@ module.exports.Parser = class MVParser extends marked.Parser
         body = @inline.output @token.text
         switch @token.depth
           when 1
-            "[bar]#{body}[/bar]\n\n"
+            "\n[bar]#{body}[/bar]\n\n"
           when 2
             "[img]http://tools.mediavida.com/sub.php?t=#{encodeURIComponent body}[/img]\n\n"
           when 3
@@ -162,5 +162,9 @@ module.exports.Parser = class MVParser extends marked.Parser
 module.exports.parse = MVParser.parse = (src, options) ->
   (new MVParser options).parse src
 
+postprocess = (text) ->
+  text = text.replace /^\s+|\s+$/g, ''
+  text = text.replace /\n[list]/g, '[list]'
+
 module.exports.make = (text, options) ->
-  MVParser.parse (Lexer.lex text, options), options
+  postprocess MVParser.parse (Lexer.lex text, options), options

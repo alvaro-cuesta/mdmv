@@ -79,7 +79,33 @@ module.exports.InlineLexer = class HTMLInlineLexer extends marked.InlineLexer
       # text
       else if cap = @rules.text.exec src
         src = src[cap[0].length..]
-        out += escape cap[0]
+        sixtysix = String.fromCharCode(58, 172, 172, 58)
+        out += (escape cap[0])
+          .replace(':)', '<img alt=":)" src="http://st3.mediavida.com/img/smiley/smile.gif">')
+          .replace(':(', '<img alt=":(" src="http://st3.mediavida.com/img/smiley/sad.gif">')
+          .replace(':D', '<img alt=":D" src="http://st3.mediavida.com/img/smiley/bigrin.gif">')
+          .replace(';)', '<img alt=";)" src="http://st3.mediavida.com/img/smiley/wink.gif">')
+          .replace(':O', '<img alt=":O" src="http://st3.mediavida.com/img/smiley/shocked.gif">')
+          .replace(':P', '<img alt=":P" src="http://st3.mediavida.com/img/smiley/tongue.gif">')
+          .replace(';(', '<img alt=";(" src="http://st3.mediavida.com/img/smiley/sniff.gif">')
+          .replace(sixtysix, '<img alt="' + sixtysix + '" src="http://st3.mediavida.com/img/smiley/66.gif">')
+          .replace(':yawn:', '<img alt=":yawn:" src="http://st3.mediavida.com/img/smiley/yawn.gif">')
+          .replace(':qq:', '<img alt=":qq:" src="http://st3.mediavida.com/img/smiley/qq.gif">')
+          .replace(':cool:', '<img alt=":cool:" src="http://st3.mediavida.com/img/smiley/cool.gif">')
+          .replace(':mad:', '<img alt=":mad:" src="http://st3.mediavida.com/img/smiley/mad.gif">')
+          .replace(':wow:', '<img alt=":wow:" src="http://st3.mediavida.com/img/smiley/wow.gif">')
+          .replace(':si:', '<img alt=":si:" src="http://st3.mediavida.com/img/smiley/yes.gif">')
+          .replace(':no:', '<img alt=":no:" src="http://st3.mediavida.com/img/smiley/no.gif">')
+          .replace(':regan:', '<img alt=":regan:" src="http://st3.mediavida.com/img/smiley/regan.gif">')
+          .replace(':o_o:', '<img alt=":o_o:" src="http://st3.mediavida.com/img/smiley/oo.gif">')
+          .replace(':muac:', '<img alt=":muac:" src="http://st3.mediavida.com/img/smiley/kiss.gif">')
+          .replace(':santo:', '<img alt=":santo:" src="http://st3.mediavida.com/img/smiley/saint.gif">')
+          .replace(':wtf:', '<img alt=":wtf:" src="http://st3.mediavida.com/img/smiley/puzzled.gif">')
+          .replace(':ninjaedit:', '<img alt=":ninjaedit:" src="http://st3.mediavida.com/img/smiley/ninjaedit.gif">')
+          .replace(':f5:', '<img alt=":f5:" src="http://st3.mediavida.com/img/smiley/f5.gif">')
+          .replace(':clint:', '<img alt=":clint:" src="http://st3.mediavida.com/img/smiley/clint.gif">')
+          .replace(':buitre:', '<img alt=":buitre:" src="http://st3.mediavida.com/img/smiley/buitre.gif">')
+          .replace(':palm:', '<img alt=":palm:" src="http://st3.mediavida.com/img/smiley/facepalm.gif">')
       # none
       else if src
         throw new Error "Infinite loop on byte: #{src.charCodeAt 0}"
@@ -118,7 +144,7 @@ module.exports.Parser = class HTMLParser extends marked.Parser
         body = @inline.output @token.text
         switch @token.depth
           when 1
-            "<h4 class=\"bar\">#{body}</h4><br><br>\n"
+            "<br><h4 class=\"bar\">#{body}</h4><br><br>\n"
           when 2
             "<img src=\"http://tools.mediavida.com/sub.php?t=#{encodeURIComponent body}\"><br><br>\n"
           when 3
@@ -161,5 +187,9 @@ module.exports.Parser = class HTMLParser extends marked.Parser
 module.exports.parse = HTMLParser.parse = (src, options) ->
   (new HTMLParser options).parse src
 
+postprocess = (text) ->
+  text = text.replace /^(<br>)+|(<br>)$/g, ''
+  text = text.replace /<br>\n<ul/g, '\n<ul'
+
 module.exports.make = (text, options) ->
-  HTMLParser.parse (Lexer.lex text, options), options
+  postprocess HTMLParser.parse (Lexer.lex text, options), options

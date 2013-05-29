@@ -1,17 +1,39 @@
 @import 'vendor/split-pane'
 
-#editor
-#generated
-  width 100%
-  height 50%
+.window_label
+  background none repeat scroll 0 0 #FFFFFF
+  border 1px solid #F1F1F1
+  border-radius 3px 3px 3px 3px
+  color #777777
+  display inline-block
+  font-size 12px
+  height 22px
+  line-height 22px
+  padding 0 6px
+  position absolute
+  left 6px
+  text-align center
+  bottom 7px
+  z-index 30
+  opacity 0.8
 
-#generated
-  color #fff
+#editor
+#html
+#mvbbcode
+  width 100%
+  height 100%
+
+#mvbbcode
+  display: none
 
 #code
-  height 100%
   width 100%
-  overflow auto
+  height 100%
+  resize none
+  border 0px
+  -webkit-box-sizing border-box
+  -moz-box-sizing border-box
+  box-sizing border-box
 
 #left
 #right
@@ -22,14 +44,15 @@
 .post
   overflow auto
 
-
 #left-component
   right 60%
-  margin-right 5px
+  margin-right 8px
 
 #my-divider
   right 60%
-  width 5px
+  width 8px
+  background url("./img/handle-v.png") no-repeat scroll 3px
+  background-color #fff
 
 #right-component
   width 60%

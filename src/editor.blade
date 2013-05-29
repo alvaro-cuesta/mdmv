@@ -2,11 +2,14 @@ include "layout.blade"
 
 render title("Editor")
 replace block body
-  .split-pane.vertical-percent
+  #everything.split-pane.vertical-percent(style="display: none")
     #left-component.split-pane-component
+      span.window_label Markdown
       #editor
-      #generated
-        pre#code
     #my-divider.split-pane-divider
     #right-component.split-pane-component
-      include "right.blade"
+      a#toggle.window_label(href="#") HTML/MVBBCode
+      #html
+        include "right.blade"
+      div#mvbbcode
+        textarea#code
