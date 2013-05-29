@@ -1,23 +1,24 @@
 {
-    "name": "mv-poster",
+    "name": "mdmv",
     "preferGlobal": true,
     "version": "0.0.1",
     "author": "Alvaro Cuesta <alvaro-cuesta@GitHub>",
-    "description": "a Markdown editor for Mediavida",
+    "description": "A Markdown editor for Mediavida",
     "bin": {
-	"mv-poster": "./bin/mv-poster.coffee"
+	"mdmv": "./bin/mdmv.coffee"
     },
     "scripts": {
-	"start": "coffee ./bin/mv-poster.coffee"
+	"start": "coffee ./bin/mdmv.coffee"
     },
-    "main": "./lib/mv-poster",
+    "main": "./lib/mdmv",
     "repository": {
 	"type": "git",
-	"url": "https://github.com/alvaro-cuesta/mv-poster.git"
+	"url": "https://github.com/alvaro-cuesta/mdmv.git"
     },
     "keywords": [
 	"mv",
-	"mediavida"
+	"mediavida",
+        "markdown"
     ],
     "dependencies": {
 	"express": "*",
