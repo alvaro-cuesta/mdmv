@@ -23,36 +23,41 @@ function msg(num, time, body)
 
 head
   title MV Poster
-  link(rel='icon', href='/favicon.ico' type='image/x-icon')
-  link(type='text/css', href='/poster.css', rel='stylesheet')
+  link(rel='icon', href='/favicon.ico', type='image/x-icon')
   link(type='text/css', href='http://st1.mediavida.com/style/399/mv.css', rel='stylesheet')
   link(type='text/css', href='http://st1.mediavida.com/style/399/foros.css', rel='stylesheet')
+  link(type='text/css', href='/lib/split-pane.css', rel='stylesheet')
+  link(type='text/css', href='/poster.css', rel='stylesheet')
+  script(src='/lib/jquery-1.8.0.min.js', type='text/javascript')
+  script(src='/lib/ace.js', type='text/javascript', charset='utf-8')
+  script(src='/lib/marked.js', type='text/javascript')
+  script(src='/lib/split-pane.js', type='text/javascript')
   script(src='http://www.mediavida.com/js/lib/prettify/prettify.js', type='text/javascript')
-  script(src='/ace.js', type='text/javascript', charset='utf-8')
-  script(src='/showdown.js', type='text/javascript')
   script(src='/channel/bcsocket.js', type='text/javascript')
   script(src='/share/share.js', type='text/javascript')
   script(src='/share/ace.js', type='text/javascript')
   script(src='/poster.js', type='text/javascript')
 body
-  div#left
-    div#editor
-    div#generated
-      pre#code
-  div#right
-    div#content_body
-      div#main
-        div.post.odd.mark
-          call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
-          call msg(1, 'Hoy, 18:06', '')
-          div.binfo
-            div.bwrap
-              div.btop
-                a.atop Top
-        div.post
-          call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
-          call msg(2, 'Hoy, 18:06', '')
-          div.binfo
-            div.bwrap
-              div.btop
-                a.atop Top
+  .split-pane.vertical-percent
+    #left-component.split-pane-component
+      #editor
+      #generated
+        pre#code
+    #my-divider.split-pane-divider
+    #right-component.split-pane-component
+      #content_body
+        #main
+          .post.odd.mark
+            call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
+            call msg(1, 'Hoy, 18:06', '')
+            .binfo
+              .bwrap
+                .btop
+                  a.atop Top
+          .post
+            call autor('Usuario', 'Tipo Random', 'http://st3.mediavida.com/img/users/avatar/default_big.png')
+            call msg(2, 'Hoy, 18:06', '')
+            .binfo
+              .bwrap
+                .btop
+                  a.atop Top
