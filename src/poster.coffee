@@ -66,60 +66,60 @@ class Lexer extends marked.Lexer
 
         @tokens.push type: 'blockquote_end'
       # list
-      # else if cap = @rules.list.exec src
-      #   src = src[cap[0].length..]
-      #   bull = cap[2]
+      else if cap = @rules.list.exec src
+        src = src[cap[0].length..]
+        bull = cap[2]
 
-      #   @tokens.push
-      #     type: 'list_start'
-      #     ordered: bull.length > 1
+        @tokens.push
+          type: 'list_start'
+          ordered: bull.length > 1
 
-      #   # Get each top-level item.
-      #   cap = cap[0].match @rules.item
+        # Get each top-level item.
+        cap = cap[0].match @rules.item
 
-      #   next = false
-      #   l = cap.length
-      #   i = 0
+        next = false
+        l = cap.length
+        i = 0
 
-      #   while i < l
-      #     i++
-      #     item = cap[i]
+        while i < l
+          item = cap[i]
 
-      #     # Remove the list item's bullet
-      #     # so it is seen as the next token.
-      #     space = item.length
-      #     item = item.replace /^ *([*+-]|\d+\.) +/, ''
+          # Remove the list item's bullet
+          # so it is seen as the next token.
+          space = item.length
+          item = item.replace /^ *([*+-]|\d+\.) +/, ''
 
-      #     # Outdent whatever the
-      #     # list item contains. Hacky.
-      #     if ~item.indexOf '\n '
-      #       space -= item.length
-      #       item = if !@options.pedantic then item.replace(new RegExp('^ {1,' + space + '}', 'gm'), '') else item.replace(/^ {1,4}/gm, '')
+          # Outdent whatever the
+          # list item contains. Hacky.
+          if ~item.indexOf '\n '
+            space -= item.length
+            item = if not @options.pedantic then item.replace(new RegExp("^ {1,#{space}}", 'gm'), '') else item.replace(/^ {1,4}/gm, '')
 
-      #     # Determine whether the next list item belongs here.
-      #     # Backpedal if it does not belong in this list.
-      #     if @options.smartLists and i != l - 1
-      #       b = block.bullet.exec(cap[i+1])[0]
-      #       if bull != b and !(bull.length > 1 and b.length > 1)
-      #         src = cap.slice(i + 1).join('\n') + src
-      #         i = l - 1
+          # Determine whether the next list item belongs here.
+          # Backpedal if it does not belong in this list.
+          if @options.smartLists and i != l - 1
+            b = /(?:[*+-]|\d+\.)/.exec(cap[i+1])[0]
+            if bull != b and not (bull.length > 1 and b.length > 1)
+              src = cap.slice(i + 1).join('\n') + src
+              i = l - 1
 
-      #     # Determine whether item is loose or not.
-      #     # Use: /(^|\n)(?! )[^\n]+\n\n(?!\s*$)/
-      #     # for discount behavior.
-      #     loose = next || /\n\n(?!\s*$)/.test(item)
-      #     if i != l - 1
-      #       next = (item[item.length-1] == '\n')
-      #       loose = next if not loose
+          # Determine whether item is loose or not.
+          # Use: /(^|\n)(?! )[^\n]+\n\n(?!\s*$)/
+          # for discount behavior.
+          loose = next || /\n\n(?!\s*$)/.test(item)
+          if i != l - 1
+            next = (item[item.length-1] == '\n')
+            loose = next if not loose
 
-      #     @tokens.push type: if loose then 'loose_item_start' else 'list_item_start'
+          @tokens.push type: if loose then 'loose_item_start' else 'list_item_start'
 
-      #     # Recurse.
-      #     @token item, false
+          # Recurse.
+          @token item, false
 
-      #     @tokens.push type: 'list_item_end'
-      #   @tokens.push
-      #     type: 'list_end'
+          @tokens.push type: 'list_item_end'
+
+          i++
+        @tokens.push type: 'list_end'
       # html
       else if cap = @rules.html.exec src
         src = src[cap[0].length..]
